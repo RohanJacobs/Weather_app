@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <!-- Custom CSS -->
+  <style>
+    body {
+      background-image: linear-gradient(rgba(10, 195, 205, 0.5), rgba(10, 31, 152, 0.622)), url('https://images.app.goo.gl/dPwdr62mQwf3qRpdA');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+    }
+
+    .navbar {
+      background-color: transparent;
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      color: #012f48;;
+    }
+
+    .search-form {
+      margin-top: 50px;
+    }
+
+    .weather-info {
+      background-color: rgba(27, 87, 172, 0.199);
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 30px;
+    }
+
+    .weather-icon {
+      font-size: 48px;
+      color: #012f48;
+    }
+
+    .weather-info h4 {
+      color: #012f48;;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #fff;
+      padding-bottom: 10px;
+    }
+
+    .btn-primary {
+      background-color: #012f48;
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #012f48;;
+    }
+
+    .input-group-append button {
+      border-radius: 0 5px 5px 0;
+    }
+
+    .weather-card {
+      background-color: #012f48;
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="#">Weather <i class="fas fa-sun"></i></a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="search-form">
+          <form method="post">
+            {% csrf_token %}
+            <div class="input-group">
+              <input type="text" class="form-control" name="city" placeholder="Enter City">
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    {% if country_code and coordinate and temp and pressure and humidity %}
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="weather-info">
+          <h4>Weather Information</h4>
+          <div class="weather-card">
+            <p><i class="fas fa-globe"></i> Country Code: {{ country_code }}</p>
+            <p><i class="fas fa-map-marker-alt"></i> Coordinate: {{ coordinate }}</p>
+            <p><i class="fas fa-thermometer-half"></i> Temperature: {{ temp }}</p>
+            <p><i class="fas fa-tachometer-alt"></i> Pressure: {{ pressure }}</p>
+            <p><i class="fas fa-tint"></i> Humidity: {{ humidity }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- Bootstrap JS and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
